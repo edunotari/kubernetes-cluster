@@ -9,10 +9,11 @@
 @@ Update OS and prepare kernel
 ```
 dnf update -y
+sudo dnf install gpm spice-vdagent -y
 sudo systemctl stop swap-create@zram0
 sudo dnf remove zram-generator-defaults
 sudo systemctl disable --now firewalld
-sudo dnf install iptables iproute-tc
+sudo dnf install iptables iproute-tc -y
 sudo cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
@@ -26,8 +27,8 @@ net.ipv4.ip_forward                 = 1
 EOF
 sudo sysctl --system
 sysctl net.bridge.bridge-nf-call-iptables net.bridge.bridge-nf-call-ip6tables net.ipv4.ip_forward
-sudo dnf install cri-o1.31 containernetworking-plugins
-sudo dnf install kubernetes1.34 kubernetes1.34-kubeadm kubernetes1.34-client
+sudo dnf install cri-o1.31 containernetworking-plugins -y
+sudo dnf install kubernetes1.34 kubernetes1.34-kubeadm kubernetes1.34-client -y
 sudo systemctl enable --now crio
 sudo kubeadm config images pull
 sudo systemctl enable --now kubelet
