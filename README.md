@@ -1,10 +1,22 @@
 # kubernetes-cluster
 
 ## Fedora Image 
-[Fedora.ISO](https://download.fedoraproject.org/pub/fedora/linux/releases/43/Server/x86_64/iso/Fedora-Server-dvd-x86_64-43-1.6.iso)
+[Fedora.ISO](https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/43.20251024.3.0/x86_64/fedora-coreos-43.20251024.3.0-live-iso.x86_64.iso)
 
 ## Create VMs
-
+``` 
+# virt-install \
+-n test \
+--description="Cloud Kubernetes test" \
+--os-variant=fedora-unknown \
+--ram=4096 \
+--vcpus=2 \
+--disk path=/var/lib/libvirt/images/test.img,bus=virtio,size=20 \
+--channel qemu-vdagent,target.type=virtio,target.name=org.libguestfs.channel.0 \
+--video qxl \
+--cdrom /home/cpqd/Downloads/Fedora-Server-netinst-x86_64-43-1.6.iso \
+--network bridge:virbr0
+```
 
 @@ Update OS and prepare kernel
 ```
