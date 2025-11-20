@@ -18,7 +18,7 @@
 --network bridge:virbr0
 ```
 
-@@ Update OS and prepare kernel
+## Update OS and prepare kernel
 ```
 dnf update -y
 sudo dnf install gpm spice-vdagent -y
@@ -48,7 +48,7 @@ sudo reboot now
 
 ```
 
-@@ Init kluster
+## Init kluster
 ```
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 ```
@@ -58,4 +58,10 @@ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
 mkdir -p $HOME/.kube
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
-``
+```
+
+## Allow master workload and label workers
+```
+kubectl label nodes --all node-role.kubernetes.io/worker=""
+```
+
