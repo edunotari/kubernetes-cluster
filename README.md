@@ -11,7 +11,7 @@
 dnf update -y
 sudo dnf install gpm spice-vdagent -y
 sudo systemctl stop swap-create@zram0
-sudo dnf remove zram-generator-defaults
+sudo dnf remove zram-generator-defaults -y
 sudo systemctl disable --now firewalld
 sudo dnf install iptables iproute-tc -y
 sudo cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
